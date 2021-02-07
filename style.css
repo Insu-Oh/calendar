@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
 
-  font-family: 'Cinzel', serif;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 .box a {
@@ -69,6 +69,12 @@
   cursor: pointer;
 }
 
+.indicator i:nth-child(1):hover,
+.indicator i:nth-child(3):hover {
+  font-size: 4em;
+  transition: 0.2s;
+}
+
 .indicator .monthIndi {
   font-size: 2.7rem;
   margin-right: 20px;
@@ -109,8 +115,13 @@
   padding: 10px;
 }
 
+.days div:hover {
+  background-color: #404040;
+  border: 1px solid black;
+}
+
 .today {
-  color: aqua;
+  background-color: #424242;
 }
 
 .pre-day,
@@ -121,7 +132,7 @@
 .popupContainer {
   position: absolute;
   top: 0;
-  height: 100%;
+  height: 110%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
@@ -134,26 +145,31 @@
   text-align: center;
 
   width: 400px;
-  height: 150px;
+  height: 170px;
   background-color: #333;
   box-shadow: 10px 5px 10px;
   border-radius: 5px;
 }
 
+.popup h3 {
+  color: white;
+  margin: 10px;
+  margin-top: 20px;
+}
+
 #dayIndi {
-  margin-top: 33px;
+  margin-top: 10px;
   color: white;
 }
 
 .popup input {
   border: none;
-  margin: 10px;
+  margin: 15px;
   padding: 5px;
   padding-left: 15px;
   height: 30px;
   width: 200px;
   border-radius: 2px;
-  font-family: serif;
   font-size: 15px;
   outline: none;
 }
