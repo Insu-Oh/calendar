@@ -18,7 +18,11 @@ weekdays[6] = 'Saturday';
 var firstDay = new Date(year, month, 1);
 var lastDay = new Date(year, month + 1, 0);
 
+var schedule = [];
 window.onload = function () {
+  if (JSON.parse(localStorage.getItem('schedule') != null)) {
+    schedule = JSON.parse(localStorage.getItem('schedule'));
+  }
   setDate();
   display();
 };
@@ -118,20 +122,28 @@ function display() {
   }
 
   //display days
+  var cur = new Date();
+  var curMonth = cur.getMonth();
+  var curYear = cur.getFullYear();
   var numDays = lastDay.getDate(); //number of days
   for (var i = 0; i < numDays; i++) {
-    dayField.innerHTML += `<div id="${year},${month + 1},${
-      i + 1
-    }" onclick="openPopup(${year},${month},${i + 1})">${i + 1} </div>`;
+    if (day === i + 1 && month === curMonth && year === curYear) {
+      dayField.innerHTML += `<div class="today" id=${year},${month + 1},${
+        i + 1
+      }" onclick="openPopup(${year},${month + 1},${i + 1})">${i + 1} </div>`;
+    } else {
+      dayField.innerHTML += `<div id="${year},${month + 1},${
+        i + 1
+      }" onclick="openPopup(${year},${month + 1},${i + 1})">${i + 1} </div>`;
+    }
   }
 
   //display schedule
   for (var i = 0; i < schedule.length; i++) {
     if (schedule[i].Year === year && schedule[i].Month === month + 1) {
-      console.log('YES!');
       document.getElementById(
         `${schedule[i].Year},${schedule[i].Month},${schedule[i].Day}`
-      ).innerHTML += `${schedule[i].Content}, `;
+      ).innerHTML += ` / ${schedule[i].Content}`;
     }
   }
   //display next days
@@ -152,7 +164,6 @@ function reset() {
   setDate();
 }
 
-var schedule = [];
 const conInput = document.getElementById('content');
 const btn = document.getElementById('addBtn');
 
@@ -164,17 +175,43 @@ function addSch(y, m, d, c) {
     Content: c,
   });
   console.log(schedule);
+  localStorage.setItem('schedule', JSON.stringify(schedule));
   display();
 }
+let Year;
+let Month;
+let Day;
 
+const popup = document.querySelector('.popupContainer');
 function openPopup(y, m, d) {
-  let Year = y;
-  let Month = m;
-  let Day = d;
-  document.querySelector('.popupContainer').style.display = 'flex';
+  Year = y;
+  Month = m;
+  Day = d;
+  popup.style.display = 'flex';
   document.getElementById('dayIndi').innerHTML = `${Year} / ${Month} / ${Day}`;
-  btn.addEventListener('click', function () {
-    addSch(parseInt(Year), parseInt(Month + 1), parseInt(Day), conInput.value);
-    document.querySelector('.popupContainer').style.display = 'none';
+  btn.addEventListener('click', add);
+  document.addEventListener('keydown', function (e) {
+    if (e.keyCode === 13 && popup.style.display === 'flex') {
+      add();
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.keyCode === 27 && popup.style.display != 'none') {
+      popup.style.display = 'none';
+    }
   });
 }
+
+function add() {
+  addSch(parseInt(Year), parseInt(Month), parseInt(Day), conInput.value);
+  conInput.value = '';
+  document.querySelector('.popupContainer').style.display = 'none';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.keyCode === 37 && popup.style.display === 'none') {
+    displayPre();
+  } else if (e.keyCode === 39 && popup.style.display === 'none') {
+    displayNext();
+  }
+});
