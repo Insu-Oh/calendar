@@ -4,6 +4,9 @@ var month = date.getMonth();
 var year = date.getFullYear();
 var day = date.getDate();
 
+var color0 = '#fff';
+var color1 = '#333';
+
 date = new Date(2021, month, 1);
 
 var weekdays = new Array();
@@ -197,6 +200,7 @@ function openPopup(y, m, d) {
   });
   document.addEventListener('keydown', (e) => {
     if (e.keyCode === 27 && popup.style.display != 'none') {
+      conInput.value = '';
       popup.style.display = 'none';
     }
   });
@@ -205,13 +209,44 @@ function openPopup(y, m, d) {
 function add() {
   addSch(parseInt(Year), parseInt(Month), parseInt(Day), conInput.value);
   conInput.value = '';
-  document.querySelector('.popupContainer').style.display = 'none';
+  popup.style.display = 'none';
 }
 
 document.addEventListener('keydown', (e) => {
-  if (e.keyCode === 37 && popup.style.display === 'none') {
+  if (e.keyCode === 37 && popup.style.display != 'flex') {
     displayPre();
-  } else if (e.keyCode === 39 && popup.style.display === 'none') {
+  } else if (e.keyCode === 39 && popup.style.display != 'flex') {
     displayNext();
+  } else if (e.keyCode === 27 && popup2.style.display != 'none') {
+    popup2.style.display = 'none';
   }
 });
+
+function reverseBackground() {
+  var container = document.querySelector('.container');
+  console.log(container);
+  container.style.backgroundColor = color0;
+  container.style.color = color1;
+}
+
+function closePopup() {
+  popup.style.display = 'none';
+}
+
+var popup2 = document.querySelector('.popupPreferences');
+
+function openPopup2() {
+  popup2.style.display = 'flex';
+}
+
+function closePopup2() {
+  popup2.style.display = 'none';
+}
+
+function reset() {
+  var resetConfrim = window.confirm('Are you sure?');
+  if (resetConfrim) {
+    localStorage.removeItem('schedule');
+    location.reload();
+  }
+}
