@@ -122,6 +122,7 @@
 
 .today {
   background-color: #424242;
+  border: 2px solid white;
 }
 
 .pre-day,
@@ -143,9 +144,9 @@
 .popup {
   position: relative;
   text-align: center;
-
-  width: 400px;
-  height: 170px;
+  border: 2px solid white;
+  width: 600px;
+  height: 200px;
   background-color: #333;
   box-shadow: 10px 5px 10px;
   border-radius: 5px;
@@ -154,7 +155,7 @@
 .popup h3 {
   color: white;
   margin: 10px;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 #dayIndi {
@@ -168,7 +169,7 @@
   padding: 5px;
   padding-left: 15px;
   height: 30px;
-  width: 200px;
+  width: 350px;
   border-radius: 2px;
   font-size: 15px;
   outline: none;
@@ -181,4 +182,72 @@
   border: none;
   cursor: pointer;
   outline: none;
+}
+
+.xBtn {
+  font-size: 15px;
+  position: absolute;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  top: 15px;
+  right: 15px;
+  background-color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 12.5px;
+  cursor: pointer;
+  color: #333;
+}
+
+.xBtn:hover {
+  background-color: rgb(177, 177, 177);
+  transition: 0.3s;
+}
+
+.popupPreferences {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  height: 110%;
+  width: 100%;
+}
+
+.popup2 {
+  box-shadow: 10px 5px 10px black;
+  border: 2px solid white;
+  display: flex;
+  color: white;
+  width: 400px;
+  height: 600px;
+  background-color: #333;
+  font-size: 1.3rem;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  border-radius: 5px;
+}
+
+.popup2 h2 {
+  margin: 80px;
+}
+
+.popup2 .reset {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgb(103, 103, 103);
+  border-bottom: 1px solid rgb(103, 103, 103);
+  padding: 5px;
+}
+
+.popup2 svg {
+  margin: 10px;
+  filter: invert(100%);
+  cursor: pointer;
+  width: 26px;
+  height: 26px;
+  border-radius: 13px;
 }
