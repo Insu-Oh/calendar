@@ -243,7 +243,7 @@ function closePopup2() {
   popup2.style.display = 'none';
 }
 
-function reset() {
+function resetData() {
   var resetConfrim = window.confirm('Are you sure?');
   if (resetConfrim) {
     localStorage.removeItem('schedule');
